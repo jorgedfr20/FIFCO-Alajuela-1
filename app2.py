@@ -167,7 +167,15 @@ html, body, [class*="css"] {
     margin: 1rem 0;
 }
 .model-box h4 { color: #1F3A5F; margin-bottom: 8px; }
-.model-box code { background: #F5F6F8; padding: 2px 6px; border-radius: 4px; }
+.model-box code { background: #F5F6F8; padding: 2px 6px; border-radius: 4px; color: #111111; }
+.model-box, .model-box p, .model-box li, .model-box ul, .model-box ol, .model-box b, .model-box strong {
+    color: #111111;
+}
+
+/* Force readable dark text for tables/dataframes in Modelos, Gráficos, Validaciones y Supuestos */
+[data-testid="stDataFrame"], [data-testid="stDataFrame"] * {
+    color: #111111 !important;
+}
 
 /* Method badge */
 .method-badge {
@@ -242,19 +250,19 @@ def load_base_data():
         [0,   0,   38,  17,  47,  25,  26,  32,  10,  47,  54,  34,  22,  171, 164, 131, 48],
         [38,  38,  0,   22,  22,  21,  13,  7,   34,  27,  35,  18,  17,  140, 141, 100, 52],
         [17,  17,  22,  0,   36,  17,  10,  18,  12,  38,  40,  19,  5,   156, 150, 115, 43],
-        [47,  47,  22,  36,  0,   22,  30,  21,  47,  6,   57,  40,  32,  153, 159, 114, 73],
+        [47,  47,  22,  36,  0,   22,  30,  21,  47,  3.3, 57,  40,  32,  153, 159, 114, 73],
         [25,  25,  21,  17,  22,  0,   17,  14,  26,  22,  51,  30,  16,  161, 160, 120, 59],
-        [26,  26,  13,  10,  30,  17,  0,   10,  21,  34,  34,  13,  4,   147, 144, 107, 44],
+        [26,  26,  13,  10,  30,  17,  0,   10,  21,  34,  34,  66.7,4,   147, 144, 107, 44],
         [32,  32,  7,   18,  21,  14,  10,  0,   29,  24,  39,  20,  13,  147, 147, 107, 53],
         [10,  10,  34,  12,  47,  26,  21,  29,  0,   48,  45,  26,  17,  162, 154, 122, 39],
-        [47,  47,  27,  38,  6,   22,  34,  24,  48,  0,   62,  44,  35,  159, 165, 120, 77],
+        [47,  47,  27,  38,  3.3, 22,  34,  24,  48,  0,   62,  44,  35,  159, 165, 120, 77],
         [54,  54,  35,  40,  57,  51,  34,  39,  45,  62,  0,   22,  37,  118, 110, 77,  30],
-        [34,  34,  18,  19,  40,  30,  13,  20,  26,  44,  22,  0,   15,  137, 132, 97,  34],
+        [34,  34,  18,  19,  40,  30,  66.7,20,  26,  44,  22,  0,   15,  137, 132, 97,  34],
         [22,  22,  17,  5,   32,  16,  4,   13,  17,  35,  37,  15,  0,   151, 147, 111, 43],
-        [171, 171, 140, 156, 153, 161, 147, 147, 162, 159, 118, 137, 151, 0,   47,  40,  138],
-        [164, 164, 141, 150, 159, 160, 144, 147, 154, 165, 110, 132, 147, 47,  0,   53,  122],
-        [131, 131, 100, 115, 114, 120, 107, 107, 122, 120, 77,  97,  111, 40,  53,  0,   100],
-        [48,  48,  52,  43,  73,  59,  44,  53,  39,  77,  30,  34,  43,  138, 122, 100, 0],
+        [171, 171, 140, 156, 153, 161, 147, 147, 162, 159, 118, 137, 151, 0,   73.3,40,  138],
+        [164, 164, 141, 150, 159, 160, 144, 147, 154, 165, 110, 132, 147, 73.3,0,   53,  122],
+        [131, 131, 100, 115, 114, 120, 107, 107, 122, 120, 77,  97,  111, 40,  53,  0,   71.3],
+        [48,  48,  52,  43,  73,  59,  44,  53,  39,  77,  30,  34,  43,  138, 122, 71.3,0],
     ]
 
     return nodes, df_demand, distance_matrix
@@ -1275,7 +1283,7 @@ def render_charts_section(trips, df_demand):
             color_discrete_sequence=["#1F3A5F", "#B89100", "#4A90B8"],
             hole=0.45,
         )
-        fig.update_layout(font_family="DM Sans", paper_bgcolor="white")
+        fig.update_layout(font_family="DM Sans", font_color="#111111", paper_bgcolor="white")
         st.plotly_chart(fig, use_container_width=True)
 
     with col2:
@@ -1286,7 +1294,7 @@ def render_charts_section(trips, df_demand):
                       color_continuous_scale=[[0, "#B8C8E0"], [1, "#1F3A5F"]],
                       text="Demanda_Total")
         fig2.update_layout(plot_bgcolor="white", paper_bgcolor="white", font_family="DM Sans",
-                           coloraxis_showscale=False)
+                           font_color="#111111", coloraxis_showscale=False)
         fig2.update_traces(textposition="outside")
         st.plotly_chart(fig2, use_container_width=True)
 
